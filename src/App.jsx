@@ -52,7 +52,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ token, setToken, authorizedUsername, setAuthorizedUsername }}>
-      <BrowserRouter>
+      <BrowserRouter basename="/49-RESTful-ExpressJs-pgSQL-Login-App/">
         <Routes>
           <Route path="/" element={<Layout token={token} setToken={setToken} />}>
             <Route index element={<Home />} />
