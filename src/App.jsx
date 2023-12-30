@@ -5,6 +5,8 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import "./App.css";
 
+const API_URL = "https://48-restful-expressjs-pgsql-login-api.vercel.app";
+
 export function Layout() {
   return (
     <>
@@ -32,8 +34,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
+          <Route path="login" element={<Login API_URL={API_URL} />} />
+          <Route path="signup" element={<SignUp API_URL={API_URL} />} />
         </Route>
       </Routes>
     </BrowserRouter>
