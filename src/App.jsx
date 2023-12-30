@@ -9,7 +9,11 @@ import "./App.css";
 
 const API_URL = "https://48-restful-expressjs-pgsql-login-api.vercel.app";
 
-export function Layout({ token }) {
+export function Layout({ token, setToken }) {
+  const handleLogout = () => {
+    setToken(null);
+  };
+
   return (
     <>
       <Navbar bg="light" expand="md" variant="light">
@@ -21,6 +25,7 @@ export function Layout({ token }) {
               {token ? (
                 <>
                   <Nav.Link as={Link} to="/">Home</Nav.Link>
+                  <Nav.Link as={Link} onClick={handleLogout}>Logout</Nav.Link>
                 </>
               )
                 : (
