@@ -1,0 +1,14 @@
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 4em !important;
+  }
+}
+
+.title {
+  font-size: 3em;
+  text-shadow: 0 0 4px #000;
+}
+
+img {
+  height: 100vh;
+}
