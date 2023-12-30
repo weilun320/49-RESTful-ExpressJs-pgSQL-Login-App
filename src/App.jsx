@@ -5,6 +5,8 @@ import { AuthContext } from "./context/AuthContext";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import RequireAuth from "./auth/RequireAuth";
 import "./App.css";
 
 const API_URL = "https://48-restful-expressjs-pgsql-login-api.vercel.app";
@@ -25,6 +27,7 @@ export function Layout({ token, setToken }) {
               {token ? (
                 <>
                   <Nav.Link as={Link} to="/">Home</Nav.Link>
+                  <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                   <Nav.Link as={Link} onClick={handleLogout}>Logout</Nav.Link>
                 </>
               )
@@ -53,6 +56,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout token={token} setToken={setToken} />}>
             <Route index element={<Home />} />
+            <Route path="profile" element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            } />
             <Route path="login" element={<Login API_URL={API_URL} />} />
             <Route path="signup" element={<SignUp API_URL={API_URL} />} />
           </Route>
