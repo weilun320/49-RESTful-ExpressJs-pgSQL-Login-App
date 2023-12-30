@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Card, Container, Form, Image, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function SignUp({ API_URL }) {
   const [username, setUsername] = useState("");
@@ -9,7 +10,14 @@ export default function SignUp({ API_URL }) {
   const [responseMessage, setResponseMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const token = useContext(AuthContext).token;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
 
   const handleSignUp = (e) => {
     e.preventDefault();

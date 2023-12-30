@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Alert, Button, Card, Container, Form, Image, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Login({ API_URL }) {
   const [username, setUsername] = useState("");
@@ -9,8 +10,15 @@ export default function Login({ API_URL }) {
   const [signUpSuccessMessage, setSignUpSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const { token, setToken, setAuthorizedUsername } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
 
   useEffect(() => {
     const successMessage = location.state?.successMessage || "";
@@ -43,6 +51,8 @@ export default function Login({ API_URL }) {
       .then(res => {
         if (res.ok) {
           return res.json().then(data => {
+            setToken(data.token);
+
             return data.token;
           });
         }
@@ -62,6 +72,7 @@ export default function Login({ API_URL }) {
               }
             })
             .then(updatedData => {
+              setAuthorizedUsername(updatedData);
               navigate("/", { state: { successMessage: "User login successfully", username: updatedData } });
             })
             .catch(error => console.error(error));
