@@ -8,12 +8,16 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import RequireAuth from "./auth/RequireAuth";
 import "./App.css";
+import { useContext } from "react";
 
 const API_URL = "https://48-restful-expressjs-pgsql-login-api.vercel.app";
 
-export function Layout({ token, setToken }) {
+export function Layout() {
+  const { token, setToken, setAuthorizedUsername } = useContext(AuthContext);
+
   const handleLogout = () => {
     setToken(null);
+    setAuthorizedUsername(null);
   };
 
   return (
@@ -54,7 +58,7 @@ function App() {
     <AuthContext.Provider value={{ token, setToken, authorizedUsername, setAuthorizedUsername }}>
       <BrowserRouter basename="/49-RESTful-ExpressJs-pgSQL-Login-App/">
         <Routes>
-          <Route path="/" element={<Layout token={token} setToken={setToken} />}>
+          <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="profile" element={
               <RequireAuth>
