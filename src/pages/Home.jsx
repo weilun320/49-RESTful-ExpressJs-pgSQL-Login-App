@@ -13,14 +13,8 @@ export default function Home() {
   useEffect(() => {
     const successMessage = location.state?.successMessage || "";
     setLoginSuccessMessage(successMessage);
-    const authorizeUsername = location.state?.username || "";
-
-    if (authorizeUsername) {
-      setIsAuthorize(authorizeUsername);
-    }
-    else {
-      setIsAuthorize(authorizedUsername);
-    }
+    const authorizeUsername = location.state?.username || authorizedUsername;
+    setIsAuthorize(authorizeUsername);
 
     const timeoutId = setTimeout(() => {
       setLoginSuccessMessage("");
