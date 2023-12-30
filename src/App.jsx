@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter, Link, Outlet, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
 import "./App.css";
 
 export function Layout() {
@@ -13,6 +14,7 @@ export function Layout() {
           <Navbar.Collapse id="navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -28,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="signup" element={<SignUp />} />
         </Route>
       </Routes>
     </BrowserRouter>

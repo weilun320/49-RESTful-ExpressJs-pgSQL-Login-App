@@ -9,6 +9,12 @@
   text-shadow: 0 0 4px #000;
 }
 
+.card {
+  background-color: rgb(255, 255, 255, .8) !important;
+  box-shadow: 0 0 8px #fff;
+  max-width: 400px;
+}
+
 img {
   height: 100vh;
 }
